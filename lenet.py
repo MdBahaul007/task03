@@ -1,13 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# ### Let's construct LeNet in Keras!
-# 
-# #### First let's load and prep our MNIST data
-
-# In[1]:
-
-
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
@@ -49,12 +39,6 @@ y_test = np_utils.to_categorical(y_test)
 num_classes = y_test.shape[1]
 num_pixels = x_train.shape[1] * x_train.shape[2]
 
-
-# ### Now let's create our layers to replicate LeNet
-
-# In[2]:
-
-
 # create model
 model = Sequential()
 
@@ -85,15 +69,14 @@ model.compile(loss = 'categorical_crossentropy',
     
 print(model.summary())
 
-
-# ### Now let us train LeNet on our MNIST Dataset
-
-# In[3]:
-
+input_file = open('/mlopsactivity3.1/input.txt','r')
+inputs = input_file.read()
+inputs = inputs.split('\n')
+epoch = int(inputs[0])
 
 # Training Parameters
 batch_size = 128
-epochs = 1
+epochs = int(inputs[0])
 
 history = model.fit(x_train, y_train,
           batch_size=batch_size,
@@ -108,27 +91,31 @@ scores = model.evaluate(x_test, y_test, verbose=1)
 print('Test loss:', scores[0])
 print('Test accuracy:', scores[1])
 
-
-# In[ ]:
-
-
-
+data_file = open('/task_03/data.txt','w')
+data_file.write(str(epochs))
+data_file.close()
 
 
-# In[ ]:
+accuracy_file = open('/task_03/accuracy.txt','w')
+accuracy_file.write(str(scores[1]))
+accuracy_file.close()
+
+display_matter = open('/task_03/display_Acc.html','r+')
+display_matter.read()
+display_matter.write('<pre>\n---------------------------------------------\n')
+#display_matter.write(model.summary())
+
+display_matter.write('\nLayer -1')
+display_matter.write('\nNumber Of Filters : 20')
+display_matter.write('\nFilter Size : 5')
+display_matter.write('\nPool Size : 2')
+
+display_matter.write('\nLayer -2')
+display_matter.write('\nNumber Of Filters : 50')
+display_matter.write('\nFilter Size : 5')
+display_matter.write('\nPool Size : 2')
+display_matter.write('\nEpochs :'+ str(epochs))
 
 
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
+display_matter.write('\nAccuracy achieved : ' + str(scores[1])+'\n</pre>')
+display_matter.close()
