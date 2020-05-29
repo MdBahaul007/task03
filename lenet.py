@@ -69,7 +69,7 @@ model.compile(loss = 'categorical_crossentropy',
     
 print(model.summary())
 
-input_file = open('/task_03/input.txt','r')
+input_file = open('/root/task_03/input.txt','r')
 inputs = input_file.read()
 inputs = inputs.split('\n')
 epoch = int(inputs[0])
