@@ -69,7 +69,7 @@ model.compile(loss = 'categorical_crossentropy',
     
 print(model.summary())
 
-input_file = open('/root/task_03/input.txt','r')
+input_file = open('/task_03/input.txt','r')
 inputs = input_file.read()
 inputs = inputs.split('\n')
 epoch = int(inputs[0])
@@ -91,16 +91,16 @@ scores = model.evaluate(x_test, y_test, verbose=1)
 print('Test loss:', scores[0])
 print('Test accuracy:', scores[1])
 
-data_file = open('/root/task_03/data.txt','w')
+data_file = open('/task_03/data.txt','w')
 data_file.write(str(epochs))
 data_file.close()
 
 
-accuracy_file = open('/root/task_03/accuracy.txt','w')
+accuracy_file = open('/task_03/accuracy.txt','w')
 accuracy_file.write(str(scores[1]))
 accuracy_file.close()
 
-display_Acc = open('/root/task_03/display_Acc.html','r+')
+display_Acc = open('/task_03/display_Acc.html','r+')
 display_Acc.read()
 display_Acc.write('<pre>\n---------------------------------------------\n')
 #display_Acc.write(model.summary())
